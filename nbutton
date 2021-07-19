@@ -1,0 +1,53 @@
+package com.company;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Random;
+import java.util.Scanner;
+
+public class rama extends JFrame implements ActionListener {
+
+    Scanner number = new Scanner(System.in);
+;   private  int n = number.nextInt();
+    JButton [] buttons = new JButton[100];
+    Random rand = new Random();
+    private int RandNumber = rand.nextInt(n);
+    public rama(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(null);
+        this.setSize(1000,1000);
+        this.setVisible(true);
+        int x = 100;
+        int y = 100;
+        int lat = 50;
+        int lung = 50;
+        for( int i = 0; i < n; ++i)
+        {
+            buttons[i] = new JButton();
+            buttons[i].addActionListener(this);
+            buttons[i].setBounds(x, y, lat, lung);
+            buttons[i].setText(String.valueOf(i+1));
+            this.add(buttons[i]);
+
+            if( x == 950)
+            {
+                y += 50;
+                x = 50;
+            }
+            else{
+                x += 50;
+            }
+
+        }
+    }
+    public void actionPerformed(ActionEvent event){
+       for(int i = 0; i < n; ++i)
+        if(event.getSource() == buttons[i] && i == RandNumber) {
+            System.out.println("winner");
+        }
+       else if (event.getSource() == buttons[i] && i != RandNumber){
+           System.out.println("try again");
+        }
+    }
+}
